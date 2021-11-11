@@ -13,19 +13,17 @@ Class Usuario
          {
             $pdo = new PDO("mysql:dbname=".$nome.",host=".$host,$usuario,$senha);
         }catch(PDOException $e){
-           $msgERRO = $e ->getMessage();
+           $msgERRO = $e->getMessage();
         }
-    }
-         
+    }        
         public function logar($nome, $senha)
     {
          global $pdo;
          //verificar se o usuario e senha estao cadastrados,se sim
-         $sql =$pdo ->prepare("SELECT id FROM usuarios WHERE nome = :n AND senha =:s");
-         $sql -> bindValue(":n",$nome);
-         $sql -> bindValue(":s",$senha);
-         $sql-> execute();
-
+         $sql = $pdo->prepare("SELECT id FROM usuarios WHERE nome = :n AND senha =:s");
+         $sql->bindValue(":n",$nome);
+         $sql->bindValue(":s",md5($senha));
+         $sql->execute();
                //consulta ao BD
          if($sql->rowCount() > 0)
          {
@@ -36,7 +34,7 @@ Class Usuario
               return true ; //logado com sucesso
          }else{
               return false;//não foi possivel logar
-              header("location;../index.php");
+              header("location:../index.php");
          }
          
     }

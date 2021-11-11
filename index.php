@@ -1,3 +1,7 @@
+<?php
+require_once 'banco_login/usuarios.php';
+$u = new Usuario
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +20,7 @@
         </br>
         </br>
         <label>Senha:</label>
-        <input type="password" name="senha " placeholder="Coloque sua senha">
+        <input type="password" name="senha" placeholder="Coloque sua senha">
         </br>
         </br>
         </br>
@@ -24,20 +28,37 @@
     </div>  
     </form>
 <?php
-   //verificar se clicou no botão
-     isset($_POST['nome']);
+ if(isset($_POST ['nome']))
+ {         
+     $nome = addslashes($_POST['nome']);
+     $senha = addslashes($_POST['senha']);
+     
+        if(!empty($nome) && !empty($senha))//verificar se o usuario apertou o botão
      {
-         $nome = addslashes($_POST['nome']);
-         $senha = addslashes($_POST['senha']);
-         //verificar se esta vazio
-         if(!empty($nome) && !empty($senha)) 
+
+           $u->conectar("deposito","localhost","root","");
+           if($u->msgERRO =="")
          {
 
+               if($u->logar($nome, $senha))
+      {
+             header("location: principal.php");
          }else
-         {
-             echo "Preencha todos os campos";
+       {
+
+          echo "Email e senha incorreto!";
+       }
          }
+
+            else {
+          echo"Erro:".$u->msgERRO;
+          }
+    }
+       else
+     {
+         echo "preencha todos os campos";
      }
-?>    
+}
+?>
 </body>
 </html>

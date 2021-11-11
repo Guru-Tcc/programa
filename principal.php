@@ -1,3 +1,11 @@
+<?php
+   session_start();//Caso o usuario copiar a url ele ira ter que voltar para a tela de login
+   if(!isset($_SESSION['id']))
+   {
+     header("location: index.php");
+     exit;
+   }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
