@@ -36,7 +36,7 @@ $u = new Usuario
         if(!empty($nome) && !empty($senha))//verificar se o usuario apertou o botão
      {
 
-           $u->conectar("deposito","host","root","");
+           $u->conectar("system_guru","host","root","");
            if($u->msgERRO =="")
          {
 

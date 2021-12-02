@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $senha = "";
-$dbname = "deposito";
+$dbname = "system_guru";
 
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
 ?>

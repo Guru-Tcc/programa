@@ -20,7 +20,7 @@ class Usuario
           global $pdo;
           global $msgERRO;
           //verificar se o usuario e senha estao cadastrados,se sim
-          $sql = $pdo->prepare("SELECT id FROM usuarios WHERE nome = :n AND senha =:s");
+          $sql = $pdo->prepare("SELECT id_usuarios FROM usuarios WHERE nome = :n AND senha =:s");
           $sql->bindValue(":n", $nome);
           $sql->bindValue(":s", md5($senha));
           $sql->execute();
@@ -29,7 +29,7 @@ class Usuario
                //entrar no sistema (sessao)
                $dado = $sql->fetch();
                session_start();
-               $_SESSION['id'] = $dado['id'];
+               $_SESSION['id_usuarios'] = $dado['id_usuarios'];
                return true; //logado com sucesso
           } else {
                return false; //não foi possivel logar
